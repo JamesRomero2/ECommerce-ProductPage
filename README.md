@@ -16,9 +16,12 @@ CODE CLEAN-UP
 -   Prettier
 -   Husky
 
-TESTING
+TESTING (Not Implemented)
 
--
+-   TypeScript (Type Checking)
+-   ESLint, lint-staged (Static Checking)
+-   Jest (Integration and Unit Testing)
+-   Cypress (End to End Testing)
 
 # TIME FRAME
 
@@ -27,4 +30,8 @@ TESTING
 
 # PROBLEMS ENCOUNTER
 
+-
+
 # PROBLEMS SOLUTION
+
+-
