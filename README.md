@@ -2,27 +2,29 @@
 
 Project Description
 
-## TECHNOLOGIES USED
+# TECHNOLOGIES USED
 
-# DEVELOPMENT
+DEVELOPMENT
 
 -   [Next.js](https://nextjs.org/)
 -   React
 -   SASS/SCSS
 
-# CODE CLEAN-UP
+CODE CLEAN-UP
 
 -   Built-in Lint
 -   Prettier
 -   Husky
 
-# TESTING
+TESTING
 
-## TIME FRAME
+-
+
+# TIME FRAME
 
 -   Start Date : MM/DD/YYY
 -   Finish Date : MM/DD/YYY
 
-## PROBLEMS ENCOUNTER
+# PROBLEMS ENCOUNTER
 
-## PROBLEMS SOLUTION
+# PROBLEMS SOLUTION

@@ -1,5 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn tsc --noEmit && yarn eslint . && yarn prettier --write .
+yarn tsc --pretty --noEmit && yarn eslint . && yarn prettier --check --write .
 yarn build
