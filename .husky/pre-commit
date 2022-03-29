@@ -1,5 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npm test
 yarn tsc --noEmit && yarn eslint . && yarn prettier --write .
+yarn build
