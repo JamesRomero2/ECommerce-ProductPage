@@ -1,20 +1,20 @@
-## Project Title
+## E-Commerce Product Page
 
-Project Description
+This is a sample e-commerce product page designed by [FrontendMentor](https://www.frontendmentor.io/challenges/ecommerce-product-page-UPsZ9MJp6) and coded by [James Romero](https://jamesromero-homepage.vercel.app/).
 
 # TECHNOLOGIES USED
 
 DEVELOPMENT
 
 -   [Next.js](https://nextjs.org/)
--   React
--   SASS/SCSS
+-   [React](https://reactjs.org/)
+-   [SASS/SCSS](https://sass-lang.com/)
 
 CODE CLEAN-UP
 
 -   Built-in Lint
--   Prettier
--   Husky
+-   [Prettier](https://prettier.io/)
+-   [Husky](https://typicode.github.io/husky/#/)
 
 TESTING (Not Implemented)
 
@@ -25,7 +25,7 @@ TESTING (Not Implemented)
 
 # TIME FRAME
 
--   Start Date : MM/DD/YYY
+-   Start Date : 03/30/2022
 -   Finish Date : MM/DD/YYY
 
 # PROBLEMS ENCOUNTER

@@ -1,0 +1,46 @@
+@use "./variables" as vr;
+
+$breakpoint_up: (
+	"xs": vr.$screen-xs,
+	"sm": vr.$screen-sm,
+	"md": vr.$screen-md,
+	"lg": vr.$screen-lg,
+	"ml": vr.$screen-ml,
+	"xl": vr.$screen-xl,
+	"ul": vr.$screen-ul,
+);
+
+$breakpoint_down: (
+	"xs": (
+		vr.$screen-xs - 1,
+	),
+	"sm": (
+		vr.$screen-sm - 1,
+	),
+	"md": (
+		vr.$screen-md - 1,
+	),
+	"lg": (
+		vr.$screen-lg - 1,
+	),
+	"ml": (
+		vr.$screen-ml - 1,
+	),
+	"xl": (
+		vr.$screen-xl - 1,
+	),
+	"ul": (
+		vr.$screen-ul - 1,
+	),
+);
+
+@mixin breakpoint-up($size) {
+	@media (min-width: map-get($breakpoint_up, $size)) {
+		@content;
+	}
+}
+@mixin breakpoint-down($size) {
+	@media (max-width: map-get($breakpoint_down, $size)) {
+		@content;
+	}
+}

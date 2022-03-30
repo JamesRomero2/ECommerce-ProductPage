@@ -1,5 +1,6 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import "../styles/index.scss";
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
@@ -18,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 					name="description"
 					content="Ecommerce Item Page coded by James Romero"
 				/>
-				<meta name="msapplication-TileColor" content="#31d35c" />
+				<meta name="msapplication-TileColor" content="#ff7d1a" />
 				<meta name="theme-color" content="#ffffff" />
 				<link
 					rel="icon"
@@ -26,7 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 					type="image"
 					sizes="16x16"
 				/>
-				<title>{/*Add Title*/}</title>
+				<title>Frontend Mentor | E-commerce product page</title>
 			</Head>
 
 			<Component {...pageProps} />

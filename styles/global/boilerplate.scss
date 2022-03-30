@@ -1,0 +1,48 @@
+@use "../utils/variables" as vr;
+
+// Document
+html {
+	height: 100%;
+	overflow-y: scroll;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+
+	background-color: var(--white);
+
+	color: var(--black);
+
+	font-family: vr.$font-family;
+	font-size: vr.$font-size;
+	letter-spacing: vr.$letter-spacing;
+	line-height: vr.$line-height;
+	text-align: left;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	transition: 0.5s;
+
+	.no-scroll &,
+	.smooth & {
+		overflow: hidden !important;
+	}
+}
+/*
+::-webkit-scrollbar {
+	width: 10px;
+}
+::-webkit-scrollbar-track {
+	background: var(--dominant);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--complimentary);
+	border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--accent);
+}
+*/

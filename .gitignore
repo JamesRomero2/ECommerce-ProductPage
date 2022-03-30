@@ -33,3 +33,9 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+*.sketch
+*.fig
+*.xd
+.DS_Store
+/sample
