@@ -1,10 +1,7 @@
 import type { NextPage } from "next";
 import Image from "next/image";
 import { useState, useEffect, useCallback, Key } from "react";
-import useEmblaCarousel, {
-	EmblaCarouselType,
-	EmblaPluginType,
-} from "embla-carousel-react";
+import useEmblaCarousel from "embla-carousel-react";
 
 interface carouselTypes {
 	key: Key;
@@ -35,13 +32,24 @@ const Home: NextPage = () => {
 	const [toggleSidebar, setToggleSidebar] = useState<boolean>(false);
 	const [toggleCart, setToggleCart] = useState<boolean>(false);
 	const [viewportRef, embla] = useEmblaCarousel({ skipSnaps: false });
-	const [prevBtnEnabled, setPrevBtnEnabled] = useState<boolean>(false);
-	const [nextBtnEnabled, setNextBtnEnabled] = useState<boolean>(false);
-	const [selectedIndex, setSelectedIndex] = useState<number>(0);
-	const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+	const [_prevBtnEnabled, setPrevBtnEnabled] = useState<boolean>(false);
+	const [_nextBtnEnabled, setNextBtnEnabled] = useState<boolean>(false);
+	const [_selectedIndex, setSelectedIndex] = useState<number>(0);
+	const [_scrollSnaps, setScrollSnaps] = useState<number[]>([]);
 	const prevImage = useCallback(() => embla && embla.scrollPrev(), [embla]);
 	const nextImage = useCallback(() => embla && embla.scrollNext(), [embla]);
 	const [quantity, setQuantity] = useState<number>(0);
+	const [itemcartQuantity, setItemcartQuantity] = useState<number>(0);
+	const [showItemCart, setShowItemCart] = useState<boolean>(false);
+
+	const addtoCart = (itemcartQuantity: number) => {
+		setItemcartQuantity(itemcartQuantity);
+		if (itemcartQuantity <= 0) {
+			setShowItemCart(false);
+			return;
+		}
+		setShowItemCart(true);
+	};
 
 	const addQuantity = () => {
 		if (quantity >= 10) return;
@@ -95,6 +103,7 @@ const Home: NextPage = () => {
 										}
 										layout={"fill"}
 										objectFit={"contain"}
+										alt="Exit icon"
 									/>
 								</div>
 								<ul>
@@ -114,6 +123,7 @@ const Home: NextPage = () => {
 							}
 							layout={"fill"}
 							objectFit={"contain"}
+							alt={"The website's logo"}
 						/>
 					</div>
 				</div>
@@ -128,12 +138,71 @@ const Home: NextPage = () => {
 							}
 							layout={"fill"}
 							objectFit={"contain"}
+							alt={"Cart Icon"}
+							className="carticn"
 						/>
+						{showItemCart && (
+							<div className="itemCartNumber">
+								{itemcartQuantity}
+							</div>
+						)}
 					</div>
 					{toggleCart && (
 						<section className="cart">
 							<div className="cart__header">Cart</div>
 							<hr />
+							{showItemCart ? (
+								<>
+									<div className="cart__items">
+										<div className="cart__items__thumbnail thumbnail">
+											<Image
+												src={
+													"https://res.cloudinary.com/blueshomepage/image/upload/v1648219744/frontendmentor/EcommerceItemPage/images/image-product-1-thumbnail_kqpwxi.jpg"
+												}
+												layout={"fill"}
+												objectFit={"contain"}
+												alt="Item Thumbnail"
+											/>
+										</div>
+										<div className="cart__text">
+											<p>Autumn Limited Edition...</p>
+											<div>
+												$125.00 x {itemcartQuantity}{" "}
+												<span className="cart__text__total">
+													&#36;
+													{125.0 * itemcartQuantity}
+													.00
+												</span>
+											</div>
+										</div>
+										<div
+											className="cart__items__thumbnail trashicon"
+											onClick={() => addtoCart(0)}
+										>
+											<Image
+												src={
+													"https://res.cloudinary.com/blueshomepage/image/upload/v1648219772/frontendmentor/EcommerceItemPage/svgs/icon-delete_vf3vrz.svg"
+												}
+												layout={"fill"}
+												objectFit={"contain"}
+												alt="Trash icon"
+											/>
+										</div>
+									</div>
+									<div className="checkout">
+										<button
+											className="checkout__btn"
+											onClick={() => addtoCart(0)}
+										>
+											Checkout
+										</button>
+									</div>
+								</>
+							) : (
+								<div className="emptCart">
+									<p>Your cart is empty.</p>
+								</div>
+							)}
 						</section>
 					)}
 					<div className="header__profileContainer">
@@ -143,6 +212,7 @@ const Home: NextPage = () => {
 							}
 							layout={"fill"}
 							objectFit={"contain"}
+							alt={"Image Avatar"}
 						/>
 					</div>
 				</div>
@@ -156,6 +226,7 @@ const Home: NextPage = () => {
 							}
 							layout={"fill"}
 							objectFit={"contain"}
+							alt={"Previous Icon"}
 						/>
 					</div>
 				</button>
@@ -171,6 +242,7 @@ const Home: NextPage = () => {
 											layout={"fill"}
 											objectFit={"cover"}
 											priority
+											alt={"Item images"}
 										/>
 									</div>
 								</div>
@@ -189,6 +261,7 @@ const Home: NextPage = () => {
 							}
 							layout={"fill"}
 							objectFit={"contain"}
+							alt={"Next Icon"}
 						/>
 					</div>
 				</button>
@@ -198,8 +271,8 @@ const Home: NextPage = () => {
 				<p className="itemName">Fall Limited Edition Sneakers</p>
 				<p className="itemDescription">
 					These low-profile sneakers are your perfect casual wear
-					companion. Featuring a durable rubber outer sole, they'll
-					withstand everything the weather can offer.
+					companion. Featuring a durable rubber outer sole,
+					they&apos;ll withstand everything the weather can offer.
 				</p>
 				<section className="pricingOffer">
 					{/* Item Pricing */}
@@ -224,6 +297,7 @@ const Home: NextPage = () => {
 								}
 								layout={"fill"}
 								objectFit={"contain"}
+								alt={"Subtraction Icon"}
 							/>
 						</div>
 					</button>
@@ -236,11 +310,15 @@ const Home: NextPage = () => {
 								}
 								layout={"fill"}
 								objectFit={"contain"}
+								alt={"Addition Icon"}
 							/>
 						</div>
 					</button>
 				</div>
-				<button className="addToCartBtn">
+				<button
+					className="addToCartBtn"
+					onClick={() => addtoCart(quantity)}
+				>
 					<p className="addToCartBtn__text">Add to cart</p>
 				</button>
 			</main>
