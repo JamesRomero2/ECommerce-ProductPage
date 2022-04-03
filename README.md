@@ -1,8 +1,8 @@
-## E-Commerce Product Page
+# E-Commerce Product Page
 
 This is a sample e-commerce product page designed by [FrontendMentor](https://www.frontendmentor.io/challenges/ecommerce-product-page-UPsZ9MJp6) and coded by [James Romero](https://jamesromero-homepage.vercel.app/).
 
-# TECHNOLOGIES USED
+**TECHNOLOGIES USED**
 
 DEVELOPMENT
 
@@ -23,15 +23,19 @@ TESTING (Not Implemented)
 -   Jest (Integration and Unit Testing)
 -   Cypress (End to End Testing)
 
-# TIME FRAME
+**TIME FRAME**
 
 -   Start Date : 03/30/2022
--   Finish Date : MM/DD/YYY
+-   Finish Date : 04/03/2022
 
-# PROBLEMS ENCOUNTER
+**PROBLEMS ENCOUNTER**
 
--
+-   No Idea how to create Image Gallery and Slideshow
+-   Poor design planning
+-   Typescript newbie
 
-# PROBLEMS SOLUTION
+**PROBLEMS SOLUTION**
 
--
+-   Use Embla (Not Recommended) use your own components when creating slideshows
+-   Plan again while in the middle of development, poor planning can cause confusion while development
+-   A lot of google search about typescript, Study a lot of typescript
