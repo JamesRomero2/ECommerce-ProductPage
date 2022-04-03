@@ -1,43 +1,13 @@
 import type { NextPage } from "next";
 import Image from "next/image";
-import { useState, useEffect, useCallback, Key } from "react";
-import useEmblaCarousel from "embla-carousel-react";
-
-interface carouselTypes {
-	key: Key;
-	img: string;
-}
-const carouselSlides: carouselTypes[] = [
-	{
-		key: 1,
-		img: "https://res.cloudinary.com/blueshomepage/image/upload/v1648219743/frontendmentor/EcommerceItemPage/images/image-product-1_xc3gss.jpg",
-	},
-	{
-		key: 2,
-		img: "https://res.cloudinary.com/blueshomepage/image/upload/v1648219746/frontendmentor/EcommerceItemPage/images/image-product-2_p8e6zo.jpg",
-	},
-	{
-		key: 3,
-		img: "https://res.cloudinary.com/blueshomepage/image/upload/v1648219748/frontendmentor/EcommerceItemPage/images/image-product-3_ie74pr.jpg",
-	},
-	{
-		key: 4,
-		img: "https://res.cloudinary.com/blueshomepage/image/upload/v1648219745/frontendmentor/EcommerceItemPage/images/image-product-4_y6zmva.jpg",
-	},
-];
-
-// REMAKE CAROUSEL
+import { useState } from "react";
+import ImageGallery from "../components/ImageGallery";
+import ImageSlideshow from "../components/ImageSlideshow";
 
 const Home: NextPage = () => {
 	const [toggleSidebar, setToggleSidebar] = useState<boolean>(false);
 	const [toggleCart, setToggleCart] = useState<boolean>(false);
-	const [viewportRef, embla] = useEmblaCarousel({ skipSnaps: false });
-	const [_prevBtnEnabled, setPrevBtnEnabled] = useState<boolean>(false);
-	const [_nextBtnEnabled, setNextBtnEnabled] = useState<boolean>(false);
-	const [_selectedIndex, setSelectedIndex] = useState<number>(0);
-	const [_scrollSnaps, setScrollSnaps] = useState<number[]>([]);
-	const prevImage = useCallback(() => embla && embla.scrollPrev(), [embla]);
-	const nextImage = useCallback(() => embla && embla.scrollNext(), [embla]);
+
 	const [quantity, setQuantity] = useState<number>(0);
 	const [itemcartQuantity, setItemcartQuantity] = useState<number>(0);
 	const [showItemCart, setShowItemCart] = useState<boolean>(false);
@@ -61,20 +31,6 @@ const Home: NextPage = () => {
 		setQuantity(quantity - 1);
 	};
 
-	const onSelect = useCallback(() => {
-		if (!embla) return;
-		setSelectedIndex(embla?.selectedScrollSnap());
-		setPrevBtnEnabled(embla?.canScrollPrev());
-		setNextBtnEnabled(embla?.canScrollNext());
-	}, [embla, setSelectedIndex]);
-
-	useEffect(() => {
-		if (!embla) return;
-		onSelect();
-		setScrollSnaps(embla.scrollSnapList());
-		embla.on("select", onSelect);
-	}, [embla, setScrollSnaps, onSelect]);
-
 	return (
 		<>
 			<header className="header headerContainer">
@@ -82,6 +38,7 @@ const Home: NextPage = () => {
 					<button
 						type="button"
 						id="hamburger"
+						className="hide-on-desktop"
 						onClick={() => setToggleSidebar(!toggleSidebar)}
 					>
 						<div></div>
@@ -126,6 +83,13 @@ const Home: NextPage = () => {
 							alt={"The website's logo"}
 						/>
 					</div>
+					<ul className="hide-on-mobile">
+						<li>Collections</li>
+						<li>Men</li>
+						<li>Women</li>
+						<li>About</li>
+						<li>Contact</li>
+					</ul>
 				</div>
 				<div className="header__right">
 					<div
@@ -217,111 +181,78 @@ const Home: NextPage = () => {
 					</div>
 				</div>
 			</header>
-			<section className="carousel">
-				<button className="carousel__btn btn__left" onClick={prevImage}>
-					<div className="lefticon">
-						<Image
-							src={
-								"https://res.cloudinary.com/blueshomepage/image/upload/v1648219769/frontendmentor/EcommerceItemPage/svgs/icon-previous_crusqa.svg"
-							}
-							layout={"fill"}
-							objectFit={"contain"}
-							alt={"Previous Icon"}
-						/>
-					</div>
-				</button>
-				<figure className="gallery">
-					{/* Image Gallery */}
-					<div className="gallery__viewport" ref={viewportRef}>
-						<div className="gallery__container">
-							{carouselSlides.map(({ key, img }) => (
-								<div className="gallery__slide" key={key}>
-									<div className="gallery__slide__image">
-										<Image
-											src={img}
-											layout={"fill"}
-											objectFit={"cover"}
-											priority
-											alt={"Item images"}
-										/>
-									</div>
-								</div>
-							))}
+			<div className="mainContainer partition">
+				{/* DESKTOP EMBLA Gallery */}
+				<ImageSlideshow />
+				{/* TODO: MAKE THIS GALLERY */}
+				<ImageGallery />
+
+				<main className="main">
+					<p className="companyName">Sneaker Company</p>
+					<p className="itemName">Fall Limited Edition Sneakers</p>
+					<p className="itemDescription">
+						These low-profile sneakers are your perfect casual wear
+						companion. Featuring a durable rubber outer sole,
+						they&apos;ll withstand everything the weather can offer.
+					</p>
+					<section className="pricingOffer">
+						{/* Item Pricing */}
+						<div className="pricingOffer__discount">
+							<p className="pricingOffer__discount__price">
+								$125.00
+							</p>
+							<p className="pricingOffer__discount__percent">
+								50%
+							</p>
 						</div>
+						<div>
+							<p className="pricingOffer__originalPrice">
+								$250.00
+							</p>
+						</div>
+					</section>
+					<div className="itemQuantity">
+						{/* Item Quantity Adjustment */}
+						<button
+							className="itemQuantity__btn"
+							onClick={minusQuantity}
+						>
+							<div className=" btn__minus">
+								<Image
+									src={
+										"https://res.cloudinary.com/blueshomepage/image/upload/v1648219766/frontendmentor/EcommerceItemPage/svgs/icon-minus_hedeaa.svg"
+									}
+									layout={"fill"}
+									objectFit={"contain"}
+									alt={"Subtraction Icon"}
+								/>
+							</div>
+						</button>
+						<p className="itemQuantity__amount ">{quantity}</p>
+						<button
+							className="itemQuantity__btn"
+							onClick={addQuantity}
+						>
+							<div className="btn__add">
+								<Image
+									src={
+										"https://res.cloudinary.com/blueshomepage/image/upload/v1648219768/frontendmentor/EcommerceItemPage/svgs/icon-plus_mpoflz.svg"
+									}
+									layout={"fill"}
+									objectFit={"contain"}
+									alt={"Addition Icon"}
+								/>
+							</div>
+						</button>
 					</div>
-				</figure>
-				<button
-					className="carousel__btn btn__right"
-					onClick={nextImage}
-				>
-					<div className="righticon">
-						<Image
-							src={
-								"https://res.cloudinary.com/blueshomepage/image/upload/v1648219767/frontendmentor/EcommerceItemPage/svgs/icon-next_h6gkrf.svg"
-							}
-							layout={"fill"}
-							objectFit={"contain"}
-							alt={"Next Icon"}
-						/>
-					</div>
-				</button>
-			</section>
-			<main className="mainContainer main">
-				<p className="companyName">Sneaker Company</p>
-				<p className="itemName">Fall Limited Edition Sneakers</p>
-				<p className="itemDescription">
-					These low-profile sneakers are your perfect casual wear
-					companion. Featuring a durable rubber outer sole,
-					they&apos;ll withstand everything the weather can offer.
-				</p>
-				<section className="pricingOffer">
-					{/* Item Pricing */}
-					<div className="pricingOffer__discount">
-						<p className="pricingOffer__discount__price">$125.00</p>
-						<p className="pricingOffer__discount__percent">50%</p>
-					</div>
-					<div>
-						<p className="pricingOffer__originalPrice">$250.00</p>
-					</div>
-				</section>
-				<div className="itemQuantity">
-					{/* Item Quantity Adjustment */}
 					<button
-						className="itemQuantity__btn"
-						onClick={minusQuantity}
+						className="addToCartBtn"
+						onClick={() => addtoCart(quantity)}
 					>
-						<div className=" btn__minus">
-							<Image
-								src={
-									"https://res.cloudinary.com/blueshomepage/image/upload/v1648219766/frontendmentor/EcommerceItemPage/svgs/icon-minus_hedeaa.svg"
-								}
-								layout={"fill"}
-								objectFit={"contain"}
-								alt={"Subtraction Icon"}
-							/>
-						</div>
+						<p className="addToCartBtn__text">Add to cart</p>
 					</button>
-					<p className="itemQuantity__amount ">{quantity}</p>
-					<button className="itemQuantity__btn" onClick={addQuantity}>
-						<div className="btn__add">
-							<Image
-								src={
-									"https://res.cloudinary.com/blueshomepage/image/upload/v1648219768/frontendmentor/EcommerceItemPage/svgs/icon-plus_mpoflz.svg"
-								}
-								layout={"fill"}
-								objectFit={"contain"}
-								alt={"Addition Icon"}
-							/>
-						</div>
-					</button>
-				</div>
-				<button
-					className="addToCartBtn"
-					onClick={() => addtoCart(quantity)}
-				>
-					<p className="addToCartBtn__text">Add to cart</p>
-				</button>
-			</main>
+				</main>
+			</div>
 			<footer></footer>
 		</>
 	);

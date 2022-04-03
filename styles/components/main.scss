@@ -1,3 +1,5 @@
+@use "../utils/" as *;
+
 .main {
 	display: flex;
 	flex-direction: column;
@@ -110,5 +112,18 @@
 			padding: 0;
 			font-size: 16px;
 		}
+	}
+}
+
+.partition {
+	display: flex;
+	flex-direction: column;
+
+	@include breakpoint-up("sm") {
+		flex-direction: row;
+		height: 100%;
+		margin-top: 30px;
+		align-items: center;
+		justify-content: center;
 	}
 }

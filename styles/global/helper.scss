@@ -1,0 +1,16 @@
+@use "../utils/" as *;
+
+.hide-on-mobile {
+	display: none;
+
+	@include breakpoint-up("sm") {
+		display: inline;
+	}
+}
+.hide-on-desktop {
+	display: inline;
+
+	@include breakpoint-up("sm") {
+		display: none;
+	}
+}

@@ -1,0 +1,105 @@
+@use "../utils/" as *;
+
+.desktopGallery {
+	display: none;
+	margin-right: 120px;
+	width: 1000px;
+	height: 520px;
+	// background-color: var(--paleOrange);
+	// border: 2px solid var(--grayishBlue);
+	border-radius: 10px;
+
+	@include breakpoint-up("sm") {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+.desktopGallery__embla {
+	position: relative;
+	min-width: 100%;
+	height: 100%;
+}
+
+.desktopGallery__embla__viewport {
+	overflow: hidden;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.desktopGallery__embla__container {
+	display: flex;
+	user-select: none;
+	-webkit-touch-callout: none;
+	-khtml-user-select: none;
+	-webkit-tap-highlight-color: transparent;
+	margin-left: -10px;
+}
+
+.desktopGallery__embla__slide {
+	padding-left: 10px;
+	min-width: 100%;
+	position: relative;
+}
+
+.desktopGallery__embla__slide__inner {
+	position: relative;
+	overflow: hidden;
+	height: 400px;
+	border-radius: 10px;
+}
+
+.desktopGallery__embla--thumb {
+	padding-top: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.desktopGallery__embla__container--thumb {
+	cursor: default;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 120px;
+	width: 100%;
+	padding-left: 50px;
+	margin-left: 10px;
+}
+
+// Thumbnail Styles
+.thumb__slide {
+	margin-left: 20px;
+	min-width: 100%;
+	position: relative;
+
+	&__thumb {
+		min-width: 10%;
+		border: 1px solid transparent;
+
+		&__selected {
+			opacity: 1;
+			border: 1px solid var(--orange);
+			border-radius: 10px;
+		}
+	}
+
+	&__inner {
+		position: relative;
+		border: none;
+		background: none;
+		overflow: hidden;
+		height: 100%;
+		min-width: 90px;
+		min-height: 90px;
+		border-radius: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		&__thumb {
+			cursor: pointer;
+		}
+	}
+}
